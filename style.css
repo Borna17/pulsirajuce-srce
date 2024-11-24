@@ -1,0 +1,102 @@
+/* Pozadina */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBackground 10s ease infinite;
+    overflow: hidden;
+}
+
+/* Srce */
+.heart {
+    width: 200px;
+    height: 200px;
+    background-color: #ff4d4d;
+    position: relative;
+    transform: rotate(-45deg);
+    animation: pulse 1.5s infinite;
+    z-index: 5; /* Srce je iza teksta */
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    width: 200px;
+    height: 200px;
+    background-color: #ff4d4d;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -100px;
+    left: 0;
+}
+
+.heart::after {
+    left: 100px;
+    top: 0;
+}
+
+/* Animacija pulsa */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(-45deg);
+        background-color: #ff4d4d;
+    }
+    50% {
+        transform: scale(1.1) rotate(-45deg);
+        background-color: #cc0000;
+    }
+}
+
+/* Eksplozija */
+.explosion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10; /* Eksplozija je iznad srca */
+}
+
+.name {
+    position: absolute;
+    font-family: 'Cursive', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: flyOut 2s ease-out forwards;
+    z-index: 15; /* Tekst je iznad svega */
+}
+
+@keyframes flyOut {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.5);
+    }
+}
+
+/* Animacija pozadine */
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
